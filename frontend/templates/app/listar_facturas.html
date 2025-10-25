@@ -1,0 +1,57 @@
+<!-- [file name]: templates/app/listar_facturas.html -->
+{% extends 'base.html' %}
+
+{% block title %}Listar Facturas{% endblock %}
+{% block page_title %}Facturas Generadas{% endblock %}
+{% block breadcrumb %}Facturación / Listar{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Facturas ({{ facturas|length }})</h3>
+            </div>
+            <div class="card-body p-0">
+                {% if facturas %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Número</th>
+                                <th>NIT Cliente</th>
+                                <th>Fecha</th>
+                                <th>Monto Total</th>
+                                <th>Detalles</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for factura in facturas %}
+                            <tr>
+                                <td>{{ factura.numero }}</td>
+                                <td>{{ factura.nit_cliente }}</td>
+                                <td>{{ factura.fecha }}</td>
+                                <td>Q {{ factura.monto_total }}</td>
+                                <td>{{ factura.detalles|length }} instancias</td>
+                                <td>
+                                    <a href="{% url 'reporte_factura_pdf' factura.numero %}" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-file-pdf"></i> PDF
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="p-3 text-center">
+                    <p class="text-muted">No hay facturas generadas</p>
+                    <a href="{% url 'facturacion' %}" class="btn btn-primary">Generar Primera Factura</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

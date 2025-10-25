@@ -1,0 +1,152 @@
+<!-- [file name]: templates/app/consultar_datos.html -->
+{% extends 'base.html' %}
+
+{% block title %}Consultar Datos{% endblock %}
+{% block page_title %}Consultar Datos del Sistema{% endblock %}
+{% block breadcrumb %}Operaciones / Consultar{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Recursos -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Recursos ({{ recursos|length }})</h3>
+            </div>
+            <div class="card-body p-0">
+                {% if recursos %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Valor/Hora</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for recurso in recursos %}
+                            <tr>
+                                <td>{{ recurso.id }}</td>
+                                <td>{{ recurso.nombre }}</td>
+                                <td><span class="badge bg-{% if recurso.tipo == 'Hardware' %}primary{% else %}success{% endif %}">{{ recurso.tipo }}</span></td>
+                                <td>Q {{ recurso.valor_x_hora }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="p-3 text-muted">No hay recursos registrados</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Categorías -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Categorías ({{ categorias|length }})</h3>
+            </div>
+            <div class="card-body p-0">
+                {% if categorias %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Carga Trabajo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for categoria in categorias %}
+                            <tr>
+                                <td>{{ categoria.id }}</td>
+                                <td>{{ categoria.nombre }}</td>
+                                <td>{{ categoria.carga_trabajo }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="p-3 text-muted">No hay categorías registradas</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <!-- Clientes -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Clientes ({{ clientes|length }})</h3>
+            </div>
+            <div class="card-body p-0">
+                {% if clientes %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>NIT</th>
+                                <th>Nombre</th>
+                                <th>Usuario</th>
+                                <th>Email</th>
+                                <th>Instancias</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cliente in clientes %}
+                            <tr>
+                                <td>{{ cliente.nit }}</td>
+                                <td>{{ cliente.nombre }}</td>
+                                <td>{{ cliente.usuario }}</td>
+                                <td>{{ cliente.correo_electronico }}</td>
+                                <td><span class="badge bg-info">{{ cliente.instancias|length }}</span></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="p-3 text-muted">No hay clientes registrados</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Consumos Pendientes -->
+{% if consumos_pendientes %}
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="card card-warning">
+            <div class="card-header">
+                <h3 class="card-title">Consumos Pendientes de Facturar</h3>
+            </div>
+            <div class="card-body">
+                {% for cliente in consumos_pendientes %}
+                <div class="callout callout-warning">
+                    <h5>{{ cliente.nombre }} ({{ cliente.nit }})</h5>
+                    <p>Total pendiente: <strong>Q {{ cliente.total_pendiente }}</strong></p>
+                    {% for instancia in cliente.instancias %}
+                    <p class="mb-1">
+                        Instancia {{ instancia.nombre_instancia }}: 
+                        {{ instancia.consumos_pendientes }} consumos, 
+                        {{ instancia.horas_pendientes }} horas - 
+                        Q {{ instancia.monto_pendiente }}
+                    </p>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,68 @@
+<!-- [file name]: templates/app/consumos_xml.html -->
+{% extends 'base.html' %}
+
+{% block title %}Cargar Consumos XML{% endblock %}
+{% block page_title %}Cargar Consumos XML{% endblock %}
+{% block breadcrumb %}Enviar XML / Consumos{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card card-warning">
+            <div class="card-header">
+                <h3 class="card-title">Cargar Archivo de Consumos XML</h3>
+            </div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="archivo_xml">Seleccionar archivo XML:</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="archivo_xml" name="archivo_xml" accept=".xml" required>
+                                <label class="custom-file-label" for="archivo_xml">Elegir archivo...</label>
+                            </div>
+                        </div>
+                        <small class="form-text text-muted">
+                            Formato esperado: listadoConsumos con registros de consumo
+                        </small>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-upload"></i> Cargar Consumos
+                    </button>
+                    <a href="{% url 'home' %}" class="btn btn-default">Cancelar</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">Formato XML de Consumos</h3>
+            </div>
+            <div class="card-body">
+                <pre><code>&lt;listadoConsumos&gt;
+  &lt;consumo nitCliente="12345-6" idInstancia="1"&gt;
+    &lt;tiempo&gt;5.5&lt;/tiempo&gt;
+    &lt;fechaHora&gt;15/11/2024 14:30&lt;/fechaHora&gt;
+  &lt;/consumo&gt;
+  &lt;consumo nitCliente="12345-6" idInstancia="1"&gt;
+    &lt;tiempo&gt;3.25&lt;/tiempo&gt;
+    &lt;fechaHora&gt;16/11/2024 10:15&lt;/fechaHora&gt;
+  &lt;/consumo&gt;
+&lt;/listadoConsumos&gt;</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('archivo_xml').addEventListener('change', function(e) {
+    var fileName = e.target.files[0].name;
+    e.target.nextElementSibling.innerText = fileName;
+});
+</script>
+{% endblock %}

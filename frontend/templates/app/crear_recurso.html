@@ -1,0 +1,58 @@
+<!-- [file name]: templates/app/crear_recurso.html -->
+{% extends 'base.html' %}
+
+{% block title %}Crear Recurso{% endblock %}
+{% block page_title %}Crear Nuevo Recurso{% endblock %}
+{% block breadcrumb %}Crear Datos / Recurso{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Información del Recurso</h3>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="id">ID del Recurso:</label>
+                        <input type="number" class="form-control" id="id" name="id" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="abreviatura">Abreviatura:</label>
+                        <input type="text" class="form-control" id="abreviatura" name="abreviatura" required maxlength="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="metrica">Métrica:</label>
+                        <input type="text" class="form-control" id="metrica" name="metrica" required>
+                        <small class="form-text text-muted">Ej: unidades, GiB, GB, etc.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">Tipo:</label>
+                        <select class="form-control" id="tipo" name="tipo" required>
+                            <option value="">Seleccionar tipo...</option>
+                            <option value="Hardware">Hardware</option>
+                            <option value="Software">Software</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="valor_x_hora">Valor por Hora (Q):</label>
+                        <input type="number" step="0.01" class="form-control" id="valor_x_hora" name="valor_x_hora" required min="0.01">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Crear Recurso
+                    </button>
+                    <a href="{% url 'consultar_datos' %}" class="btn btn-default">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

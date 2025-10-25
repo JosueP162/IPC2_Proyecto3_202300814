@@ -1,0 +1,143 @@
+<!-- [file name]: templates/app/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - Cloud Management{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+{% block breadcrumb %}Inicio{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Tarjetas de Estado -->
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ estado.recursos|default:0 }}</h3>
+                    <p>Recursos Registrados</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <a href="{% url 'consultar_datos' %}" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{ estado.categorias|default:0 }}</h3>
+                    <p>Categorías</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <a href="{% url 'consultar_datos' %}" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>{{ estado.clientes|default:0 }}</h3>
+                    <p>Clientes</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <a href="{% url 'consultar_datos' %}" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>{{ estado.facturas|default:0 }}</h3>
+                    <p>Facturas Generadas</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <a href="{% url 'listar_facturas' %}" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Acciones Rápidas -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Acciones Rápidas</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <a href="{% url 'configuracion_xml' %}" class="btn btn-primary btn-block">
+                                <i class="fas fa-file-upload"></i> Cargar Configuración XML
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <a href="{% url 'crear_recurso' %}" class="btn btn-success btn-block">
+                                <i class="fas fa-plus"></i> Nuevo Recurso
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <a href="{% url 'facturacion' %}" class="btn btn-warning btn-block">
+                                <i class="fas fa-file-invoice"></i> Generar Facturas
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <a href="{% url 'consultar_datos' %}" class="btn btn-info btn-block">
+                                <i class="fas fa-search"></i> Consultar Datos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estado del Sistema -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Resumen del Sistema</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Instancias Activas
+                            <span class="badge bg-primary badge-pill">{{ estado.instancias_activas|default:0 }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Total Instancias
+                            <span class="badge bg-success badge-pill">{{ estado.total_instancias|default:0 }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Backend Status
+                            <span class="badge bg-success badge-pill">Conectado</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Información del Proyecto</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Proyecto:</strong> IPC2 - Proyecto 3</p>
+                    <p><strong>Estudiante:</strong> Josue - 202300814</p>
+                    <p><strong>Backend:</strong> Flask API</p>
+                    <p><strong>Frontend:</strong> Django + AdminLTE</p>
+                    <a href="{% url 'informacion_estudiante' %}" class="btn btn-outline-primary btn-sm">Más Información</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

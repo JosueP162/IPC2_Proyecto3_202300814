@@ -1,0 +1,40 @@
+<!-- [file name]: templates/app/facturacion.html -->
+{% extends 'base.html' %}
+
+{% block title %}Generar Facturas{% endblock %}
+{% block page_title %}Generar Facturas{% endblock %}
+{% block breadcrumb %}Facturación / Generar{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card card-warning">
+            <div class="card-header">
+                <h3 class="card-title">Generar Facturas</h3>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="fecha_inicio">Fecha Inicio:</label>
+                        <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_fin">Fecha Fin:</label>
+                        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" required>
+                    </div>
+                    <div class="alert alert-info">
+                        <strong>Nota:</strong> Se generarán facturas para todos los consumos no facturados en el rango de fechas seleccionado.
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-file-invoice"></i> Generar Facturas
+                    </button>
+                    <a href="{% url 'listar_facturas' %}" class="btn btn-default">Ver Facturas Existentes</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

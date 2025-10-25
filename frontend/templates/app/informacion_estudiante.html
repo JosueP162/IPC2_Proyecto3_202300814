@@ -1,0 +1,58 @@
+<!-- [file name]: templates/app/informacion_estudiante.html -->
+{% extends 'base.html' %}
+
+{% block title %}Información del Estudiante{% endblock %}
+{% block page_title %}Información del Estudiante{% endblock %}
+{% block breadcrumb %}Ayuda / Información{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-user-graduate"></i> Datos del Estudiante</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Nombre:</strong> Josue [Tu Nombre Completo]</p>
+                        <p><strong>Carnet:</strong> 202300814</p>
+                        <p><strong>Curso:</strong> IPC2 - Introducción a la Programación y Computación 2</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Universidad:</strong> Universidad San Carlos de Guatemala</p>
+                        <p><strong>Facultad:</strong> Facultad de Ingeniería</p>
+                        <p><strong>Escuela:</strong> Escuela de Ciencias y Sistemas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-chalkboard-teacher"></i> Catedráticos</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for catedratico in estudiante.catedraticos %}
+                    <li class="list-group-item">{{ catedratico }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="card card-warning">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-users"></i> Tutores de Curso</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for tutor in estudiante.tutores %}
+                    <li class="list-group-item">{{ tutor }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

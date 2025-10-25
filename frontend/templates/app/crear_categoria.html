@@ -1,0 +1,47 @@
+<!-- [file name]: templates/app/crear_categoria.html -->
+{% extends 'base.html' %}
+
+{% block title %}Crear Categoría{% endblock %}
+{% block page_title %}Crear Nueva Categoría{% endblock %}
+{% block breadcrumb %}Crear Datos / Categoría{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title">Información de la Categoría</h3>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="id">ID de la Categoría:</label>
+                        <input type="number" class="form-control" id="id" name="id" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        <small class="form-text text-muted">Ej: Máquinas Virtuales Económicas</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="carga_trabajo">Carga de Trabajo:</label>
+                        <input type="text" class="form-control" id="carga_trabajo" name="carga_trabajo" required>
+                        <small class="form-text text-muted">Ej: Baja carga, Alta disponibilidad, etc.</small>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i> Crear Categoría
+                    </button>
+                    <a href="{% url 'consultar_datos' %}" class="btn btn-default">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

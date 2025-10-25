@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<database>
+  <recursos />
+  <categorias />
+  <clientes>
+    <cliente nit="12345-6">
+      <nombre>Empresa Ejemplo SA</nombre>
+      <usuario>empresa_ejemplo</usuario>
+      <clave>clave123</clave>
+      <direccion>Ciudad de Guatemala</direccion>
+      <correoElectronico>contacto@empresa.com</correoElectronico>
+      <listaInstancias />
+    </cliente>
+  </clientes>
+  <facturas />
+</database>

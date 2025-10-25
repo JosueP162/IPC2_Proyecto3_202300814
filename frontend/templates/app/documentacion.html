@@ -1,0 +1,49 @@
+<!-- [file name]: templates/app/documentacion.html -->
+{% extends 'base.html' %}
+
+{% block title %}Documentación{% endblock %}
+{% block page_title %}Documentación del Sistema{% endblock %}
+{% block breadcrumb %}Ayuda / Documentación{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Sistema de Gestión Cloud - Tecnologías Chapinas, S.A.</h3>
+            </div>
+            <div class="card-body">
+                <h4>Descripción del Proyecto</h4>
+                <p>Sistema integral para la gestión y facturación de servicios de infraestructura en la nube.</p>
+                
+                <h4>Arquitectura</h4>
+                <ul>
+                    <li><strong>Backend:</strong> Flask API REST con base de datos XML</li>
+                    <li><strong>Frontend:</strong> Django con AdminLTE</li>
+                    <li><strong>Comunicación:</strong> APIs HTTP/JSON</li>
+                </ul>
+
+                <h4>Funcionalidades Principales</h4>
+                <ul>
+                    <li>Gestión de recursos, categorías y configuraciones</li>
+                    <li>Registro de clientes e instancias</li>
+                    <li>Carga de datos mediante XML</li>
+                    <li>Proceso de facturación automática</li>
+                    <li>Generación de reportes PDF</li>
+                    <li>Análisis de ventas</li>
+                </ul>
+
+                <h4>Tecnologías Utilizadas</h4>
+                <ul>
+                    <li>Python 3.8+</li>
+                    <li>Flask + Flask-CORS</li>
+                    <li>Django 4.2+</li>
+                    <li>AdminLTE 4.0</li>
+                    <li>ReportLab (PDF)</li>
+                    <li>XML.etree</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

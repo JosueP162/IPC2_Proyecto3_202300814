@@ -1,0 +1,41 @@
+<!-- [file name]: templates/app/inicializar_sistema.html -->
+{% extends 'base.html' %}
+
+{% block title %}Inicializar Sistema{% endblock %}
+{% block page_title %}Inicializar Sistema{% endblock %}
+{% block breadcrumb %}Operaciones / Inicializar{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-exclamation-triangle"></i> Precaución</h3>
+            </div>
+            <div class="card-body">
+                <p class="lead">¿Está seguro que desea inicializar el sistema?</p>
+                <p>Esta acción <strong>eliminará todos los datos</strong> incluyendo:</p>
+                <ul>
+                    <li>Recursos registrados</li>
+                    <li>Categorías y configuraciones</li>
+                    <li>Clientes e instancias</li>
+                    <li>Facturas generadas</li>
+                    <li>Consumos registrados</li>
+                </ul>
+                <div class="alert alert-warning">
+                    <strong>¡Esta acción no se puede deshacer!</strong>
+                </div>
+            </div>
+            <div class="card-footer">
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Sí, Inicializar Sistema
+                    </button>
+                    <a href="{% url 'home' %}" class="btn btn-default">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

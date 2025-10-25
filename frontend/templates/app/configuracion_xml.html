@@ -1,0 +1,89 @@
+<!-- [file name]: templates/app/configuracion_xml.html -->
+{% extends 'base.html' %}
+
+{% block title %}Cargar Configuración XML{% endblock %}
+{% block page_title %}Cargar Configuración XML{% endblock %}
+{% block breadcrumb %}Enviar XML / Configuración{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Cargar Archivo de Configuración XML</h3>
+            </div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="archivo_xml">Seleccionar archivo XML:</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="archivo_xml" name="archivo_xml" accept=".xml" required>
+                                <label class="custom-file-label" for="archivo_xml">Elegir archivo...</label>
+                            </div>
+                        </div>
+                        <small class="form-text text-muted">
+                            Formato esperado: archiveConfiguraciones con listaRecursos, listaCategorias, listaClientes
+                        </small>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-upload"></i> Cargar Configuración
+                    </button>
+                    <a href="{% url 'home' %}" class="btn btn-default">Cancelar</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Información del formato -->
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">Información del Formato XML</h3>
+            </div>
+            <div class="card-body">
+                <p>El archivo XML debe contener la siguiente estructura:</p>
+                <pre><code>&lt;archiveConfiguraciones&gt;
+  &lt;listaRecursos&gt;
+    &lt;recurso id="1"&gt;
+      &lt;nombre&gt;CPU Núcleos&lt;/nombre&gt;
+      &lt;abreviatura&gt;CPU&lt;/abreviatura&gt;
+      &lt;metrica&gt;unidades&lt;/metrica&gt;
+      &lt;tipo&gt;Hardware&lt;/tipo&gt;
+      &lt;valorXhora&gt;1.20&lt;/valorXhora&gt;
+    &lt;/recurso&gt;
+  &lt;/listaRecursos&gt;
+  &lt;listaCategorias&gt;
+    &lt;categoria id="1"&gt;
+      &lt;nombre&gt;Máquinas Virtuales Económicas&lt;/nombre&gt;
+      &lt;descripcion&gt;Para desarrollo y pruebas&lt;/descripcion&gt;
+      &lt;cargaTrabajo&gt;Baja carga&lt;/cargaTrabajo&gt;
+    &lt;/categoria&gt;
+  &lt;/listaCategorias&gt;
+  &lt;listaClientes&gt;
+    &lt;cliente nit="12345-6"&gt;
+      &lt;nombre&gt;Empresa Ejemplo&lt;/nombre&gt;
+      &lt;usuario&gt;empresa_ejemplo&lt;/usuario&gt;
+      &lt;clave&gt;clave123&lt;/clave&gt;
+      &lt;direccion&gt;Ciudad&lt;/direccion&gt;
+      &lt;correoElectronico&gt;email@empresa.com&lt;/correoElectronico&gt;
+    &lt;/cliente&gt;
+  &lt;/listaClientes&gt;
+&lt;/archiveConfiguraciones&gt;</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Mostrar nombre del archivo seleccionado
+document.getElementById('archivo_xml').addEventListener('change', function(e) {
+    var fileName = e.target.files[0].name;
+    var nextSibling = e.target.nextElementSibling;
+    nextSibling.innerText = fileName;
+});
+</script>
+{% endblock %}

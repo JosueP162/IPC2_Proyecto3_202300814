@@ -1,0 +1,44 @@
+<!-- [file name]: templates/app/reporte_analisis.html -->
+{% extends 'base.html' %}
+
+{% block title %}Reporte de Análisis{% endblock %}
+{% block page_title %}Análisis de Ventas{% endblock %}
+{% block breadcrumb %}Reportes PDF / Análisis{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Generar Reporte de Análisis</h3>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="fecha_inicio">Fecha Inicio:</label>
+                        <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_fin">Fecha Fin:</label>
+                        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo_analisis">Tipo de Análisis:</label>
+                        <select class="form-control" id="tipo_analisis" name="tipo_analisis" required>
+                            <option value="categorias">Por Categorías y Configuraciones</option>
+                            <option value="recursos">Por Recursos</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-chart-bar"></i> Generar Reporte PDF
+                    </button>
+                    <a href="{% url 'home' %}" class="btn btn-default">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
